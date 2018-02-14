@@ -1,0 +1,6 @@
+prog Terminator terminator terminator
+separator
+prog Ethereum ethereumwallet ethereumwallet
+separator
+prog Firefox /usr/share/pixmaps/firefox-esr.png firefox
+prog Chromium /usr/share/pixmaps/chromium.png chromium --no-sandbox --start-maximized --user-data-dir --enable-remote-extensions
