@@ -15,18 +15,18 @@ ENV STARTUPDIR /dockerstartup
 WORKDIR $HOME
 
 # Envrionment config
-ENV DEBIAN_FRONTEND noninteractive
 ENV NO_VNC_HOME $HOME/noVNC
 ENV VNC_COL_DEPTH 24
 ENV VNC_RESOLUTION 1280x1024
 ENV VNC_PW vncpassword
 
 # Add all install scripts for further steps
-ENV INST_SCRIPTS $HOME/install-scripts
+ENV INST_SCRIPTS $HOME/.install-scripts
 ADD ./install-scripts $INST_SCRIPTS/
 RUN find $INST_SCRIPTS -name '*.sh' -exec chmod a+x {} +
 
 # Install some common tools and xorg stuff
+ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
 \
 && apt-get -yqq --no-install-suggests --no-install-recommends install \
@@ -73,6 +73,7 @@ RUN apt-get update \
 \
 && echo "Cleaning system" \
 && apt-get clean all && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man* /tmp/* /var/tmp/*
+ENV DEBIAN_FRONTEND interactive
 
 ### Install IceWM UI
 ADD ./icewm/ $HOME/
